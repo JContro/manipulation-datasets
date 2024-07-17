@@ -6,6 +6,8 @@ import logging
 
 
 from apis.openai_api import run_model as openai_run_model
+from apis.google_api import run_model as google_run_model
+from apis.anthropic_api import run_model as anthropic_run_model
 
 def setup_logging(log_level):
     logging.basicConfig(
@@ -90,6 +92,10 @@ def main():
 
         if model == "gpt4":
             openai_run_model(n)
+        if model == "gemini":
+            google_run_model(n)
+        if model == "claude":
+            anthropic_run_model(n)
             
         
 

@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 logger = logging.getLogger(__name__)
 
 # Constants
-MODEL_NAME = "gpt-4"
+MODEL_NAME = "gpt-4o"
 
 def setup_openai_client() -> OpenAI:
     api_key = os.getenv("OPENAI_API_KEY")
@@ -34,7 +34,7 @@ def process_prompt(client: OpenAI, prompt: Dict) -> Dict:
             messages=[message],
             model=MODEL_NAME,
         )
-        
+
         output = prompt.copy()
         output["model"] = MODEL_NAME
         output["chat_completion"] = chat_completion.choices[0].message.content

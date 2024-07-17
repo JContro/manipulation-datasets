@@ -5,7 +5,6 @@ from typing import List, Dict, Any
 # Get a logger for this module
 logger = logging.getLogger(__name__)
 
-
 def generate_prompts(contexts: List[Dict[str, Any]], manipulation_types: Dict[str, str], n: int = 1) -> List[Dict[str, Any]]:
     """
     Generate prompts based on contexts and manipulation types.

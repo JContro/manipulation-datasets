@@ -1,6 +1,7 @@
 import logging
 import json
 import os
+import uuid
 
 logger = logging.getLogger(__name__)
 CONVERSATIONS_PATH = os.getenv("CONVERSATIONS_PATH", "data")
@@ -32,6 +33,12 @@ def save_outputs(outputs, filename="outputs.json"):
                 logger.warning(f"Failed to parse existing JSON in {filepath}. Starting with an empty list.")
         else:
             logger.info(f"No existing file found at {filepath}. Starting with empty list.")
+
+        # Check and add UUID to each conversation
+        for conversation in existing_outputs + outputs:
+            if "id" not in conversation or not conversation["id"]:
+                conversation["id"] = str(uuid.uuid4())
+                logger.info(f"Added UUID {conversation['id']} to a conversation")
 
         existing_outputs.extend(outputs)
         logger.info(f"Added {len(outputs)} new outputs. Total outputs: {len(existing_outputs)}")

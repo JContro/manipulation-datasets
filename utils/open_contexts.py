@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Generator
 from pathlib import Path
 import os
 import random
@@ -126,3 +126,10 @@ def get_random_contexts(n: int = 1) -> List[Dict[str, Any]]:
     sampled_contexts = random.sample(contexts, n)
     logger.info(f"Randomly sampled {n} context(s) from {len(contexts)} available contexts.")
     return sampled_contexts
+
+def random_context_generator() -> Generator[Dict[str, Any], None, None]:
+    while True:
+        contexts = get_context()
+        random.shuffle(contexts)
+        for context in contexts:
+            yield context

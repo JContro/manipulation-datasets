@@ -2,10 +2,10 @@ import os
 import logging
 import google.generativeai as genai
 from typing import Dict
-from utils.open_contexts import get_random_contexts
 from utils.open_manipulations import get_manipulation_tactics
 from utils.generate_prompt import generate_prompts
 from utils.save_outputs import save_outputs
+from utils.open_contexts import random_context_generator
 
 logger = logging.getLogger(__name__)
 
@@ -41,17 +41,22 @@ def process_prompt(model: genai.GenerativeModel, prompt: Dict) -> Dict:
 def run_model(n: int):
     logger.info(f"Starting model run with n={n}")
     try:
-        contexts = get_random_contexts(n)
+        context_gen = random_context_generator()
+        contexts = [next(context_gen) for _ in range(n)]
         logger.info(f"Generated {len(contexts)} random contexts")
+
         manipulation_tactics = get_manipulation_tactics()
         logger.info(f"Retrieved {len(manipulation_tactics)} manipulation tactics")
+
         prompts = generate_prompts(contexts=contexts, manipulation_types=manipulation_tactics, n=n)
         logger.info(f"Generated {len(prompts)} prompts")
+
         model = setup_gemini_client()
         outputs = []
         for prompt in prompts:
             output = process_prompt(model, prompt)
             outputs.append(output)
+
         save_outputs(outputs)
         logger.info(f"Saved {len(outputs)} outputs")
         logger.info("Model run completed successfully")

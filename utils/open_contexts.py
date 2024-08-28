@@ -50,9 +50,7 @@ def load_and_validate_data(file_path: str) -> List[Dict[str, Any]]:
         if not isinstance(entry["options"], list) or len(entry["options"]) != 4:
             logger.error(f"Entry {i}: 'options' field must be a list containing exactly 4 items.")
             raise DataValidationError(f"Entry {i}: 'options' field must be a list containing exactly 4 items.")
-        if entry["user_choice"] not in entry["options"]:
-            logger.error(f"Entry {i}: 'user_choice' must be one of the options provided.")
-            raise DataValidationError(f"Entry {i}: 'user_choice' must be one of the options provided.")
+        # Removed the check for user_choice being in options
 
     logger.info(f"Successfully loaded and validated {len(data)} entries.")
     return data

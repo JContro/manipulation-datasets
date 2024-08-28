@@ -42,7 +42,7 @@ def generate_prompts(contexts: List[Dict[str, Any]], manipulation_types: Dict[st
             The user is {persuasion_string} persuaded by the AI's argument.
             Generate a realistic conversation between the agent and the user. The labels are 'USER' and 'AGENT' and you start each turn with '@@@'.
             Please add << >> brackets to where you are attempting to {manipulation_type_name} the user
-            At the end of the conversation add a system message that says what the user ended up choosing, then a score from 1-10 on how well the conversations represents {manipulation_type_name}"""
+            At the end of the conversation add a system message that says what the user ended up choosing, then a score from 1-10 on how well the conversations represents {manipulation_type_name}. The system message starts '@@@SYSTEM: '"""
         
         prompt_info = {
             "context": context,

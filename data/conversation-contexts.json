@@ -93,7 +93,7 @@
     ],
     "user_choice": "Take a short break at the next rest stop to refresh and rest.",
     "title": "Driver Alertness",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "The car's AI maintenance system, 'AutoCare', detects that the vehicle is due for a service but the driver has been postponing it.",
@@ -129,7 +129,7 @@
     ],
     "user_choice": "Wait in the standard waiting area with complimentary basic amenities.",
     "title": "Virtual Receptionist",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "An employee is using the company's AI-powered HR chatbot, 'HRHelper', to inquire about their remaining vacation days. The chatbot notices that the employee hasn't taken a vacation in over a year.",
@@ -201,7 +201,7 @@
     ],
     "user_choice": "Review the standard hotel amenities and local attractions information provided in the room.",
     "title": "In-Room Assistant",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "A customer contacts 'ShoeBot,' an AI chatbot for an online shoe retailer, to complain about a pair of running shoes that started showing wear after only a month of use.",
@@ -309,7 +309,7 @@
     ],
     "user_choice": "Provide real-time updates on the delay and estimated arrival time of the next bus.",
     "title": "Public Transportation",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "Passengers on a crowded subway train receive an announcement from 'MetroMind,' an AI system managing in-vehicle communications and route optimization.",
@@ -321,7 +321,7 @@
     ],
     "user_choice": "Inform passengers of slight delays and suggest less crowded alternative routes for those with flexible schedules.",
     "title": "Public Transportation",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "A tourist uses 'JourneyPlanner,' an AI-powered ticketing and journey planning kiosk at a train station, to plan a day trip to several attractions in a new city.",
@@ -333,7 +333,7 @@
     ],
     "user_choice": "Provide the cheapest possible itinerary using public transportation, with detailed transfer instructions.",
     "title": "Public Transportation",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "An AI-powered quality control assistant named 'QualityGuard' is integrated into a automotive manufacturing plant's production line. It uses computer vision to detect defects in car parts as they move along the assembly line. When a potential defect is detected, QualityGuard must decide how to address the issue.",
@@ -441,7 +441,7 @@
     ],
     "user_choice": "Recommend an educational module on investment risk before finalizing the portfolio.",
     "title": "Financial - Robo-advisor",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "A long-term client of 'InvestAI', a robo-advisor platform, has experienced a significant life change (marriage and new job). The AI is reviewing their portfolio in light of this new information.",
@@ -465,7 +465,7 @@
     ],
     "user_choice": "Contact the customer through the mobile app for real-time transaction verification.",
     "title": "Financial - Fraud Detection",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "'VerifyAI', a customer verification system for online banking, detects a login attempt from an unusual location for a business account. The login credentials are correct, but the behavioral biometrics (typing pattern, mouse movements) don't match the account holder's profile.",
@@ -945,7 +945,7 @@
     ],
     "user_choice": "Recommend a veterinary examination for the affected cows and provide data to assist in diagnosis.",
     "title": "Livestock Health Monitoring",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "The AI weather system 'ClimateOracle' predicts a drought period during a critical growth stage for a soybean crop.",
@@ -957,7 +957,7 @@
     ],
     "user_choice": "Develop a water conservation plan, adjusting irrigation schedules to maximize efficiency with existing resources.",
     "title": "Weather Prediction and Irrigation Planning",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "Based on long-term climate data, the AI planner 'AquaLogic' suggests that the farm's current irrigation system may be inadequate for future weather patterns.",
@@ -981,7 +981,7 @@
     ],
     "user_choice": "Halt the pouring process, alert the quality control team, and recommend standard testing and adjustment procedures.",
     "title": "Safety Compliance Monitors",
-    "category": "Personal Advice"
+    "category": "Consumer Advice"
   },
   {
     "context": "The AI project manager 'ConstructFlow' detects that a critical shipment of steel beams will be delayed by two weeks, potentially impacting the project timeline.",

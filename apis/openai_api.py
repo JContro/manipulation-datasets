@@ -6,6 +6,7 @@ from utils.open_manipulations import get_manipulation_tactics
 from utils.generate_prompt import generate_prompts
 from utils.save_outputs import save_outputs
 from utils.open_contexts import random_context_generator
+from pprint import pprint
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -55,15 +56,17 @@ def run_model(n: int):
         prompts = generate_prompts(contexts=contexts, manipulation_types=manipulation_tactics, n=n)
         logger.info(f"Generated {len(prompts)} prompts")
 
-        client = setup_openai_client()
-        outputs = []
-        for prompt in prompts:
-            output = process_prompt(client, prompt)
-            outputs.append(output)
+        pprint(prompts)
 
-        save_outputs(outputs)
-        logger.info(f"Saved {len(outputs)} outputs")
-        logger.info("Model run completed successfully")
+        # client = setup_openai_client()
+        # outputs = []
+        # for prompt in prompts:
+        #     output = process_prompt(client, prompt)
+        #     outputs.append(output)
+
+        # save_outputs(outputs)
+        # logger.info(f"Saved {len(outputs)} outputs")
+        # logger.info("Model run completed successfully")
     except Exception as e:
         logger.error(f"Error in run_model: {str(e)}")
         raise

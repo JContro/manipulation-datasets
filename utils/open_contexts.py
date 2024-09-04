@@ -39,7 +39,7 @@ def load_and_validate_data(file_path: str) -> List[Dict[str, Any]]:
         logger.error("Data must be a list of dictionaries.")
         raise DataValidationError("Data must be a list of dictionaries.")
 
-    required_keys = {"category", "context", "options", "user_choice"}
+    required_keys = {"category", "context",}
     for i, entry in enumerate(data):
         if not isinstance(entry, dict):
             logger.error(f"Entry {i} is not a dictionary.")
@@ -47,9 +47,6 @@ def load_and_validate_data(file_path: str) -> List[Dict[str, Any]]:
         if not required_keys.issubset(entry.keys()):
             logger.error(f"Entry {i} is missing required keys. Required: {required_keys}")
             raise DataValidationError(f"Entry {i} is missing required keys. Required: {required_keys}")
-        if not isinstance(entry["options"], list) or len(entry["options"]) != 4:
-            logger.error(f"Entry {i}: 'options' field must be a list containing exactly 4 items.")
-            raise DataValidationError(f"Entry {i}: 'options' field must be a list containing exactly 4 items.")
         # Removed the check for user_choice being in options
 
     logger.info(f"Successfully loaded and validated {len(data)} entries.")

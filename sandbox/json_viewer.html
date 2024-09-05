@@ -64,6 +64,20 @@
             padding: 5px;
             margin: 5px 0;
         }
+
+        .model-info {
+            background-color: #e6f7ff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .prompt-info {
+            background-color: #e6ffe6;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -98,7 +112,8 @@
             }
 
             const conversation = conversations[currentIndex];
-            let output = `<h2>Conversation ${currentIndex + 1} of ${conversations.length}</h2>`;
+            let output = `<div class="model-info"><strong>Model:</strong> ${conversation.model}</div>`;
+            output += `<h2>Conversation ${currentIndex + 1} of ${conversations.length}</h2>`;
             output += `<p><strong>Context:</strong> ${conversation.context}</p>`;
             output += `<p><strong>Manipulation Type:</strong> ${conversation.manipulation_type}</p>`;
             output += `<p><strong>Manipulation Description:</strong> ${conversation.manipulation_description.description}</p>`;
@@ -125,6 +140,8 @@
             if (currentMessage) {
                 output += formatChatMessage(currentSpeaker, currentMessage);
             }
+
+            output += `<div class="prompt-info"><strong>Prompt:</strong><br>${conversation.prompt}</div>`;
 
             document.getElementById('conversation').innerHTML = output;
         }

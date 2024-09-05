@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Conversation Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #conversation {
+            margin-top: 20px;
+        }
+
+        .chat-message {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .chat-message strong {
+            color: #007bff;
+        }
+
+        .manipulation-attempt {
+            background-color: #ffe6e6;
+            border-left: 3px solid #ff4d4d;
+            padding: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>JSON Conversation Viewer</h1>
+        <textarea id="jsonInput" placeholder="Paste your JSON here"></textarea>
+        <button onclick="loadJSON()">Load JSON</button>
+        <button onclick="nextConversation()">Next Conversation</button>
+        <div id="conversation"></div>
+    </div>
+
+    <script>
+        let conversations = [];
+        let currentIndex = 0;
+
+        function loadJSON() {
+            const jsonInput = document.getElementById('jsonInput').value;
+            try {
+                conversations = JSON.parse(jsonInput);
+                currentIndex = 0;
+                displayConversation();
+            } catch (error) {
+                alert('Invalid JSON. Please check your input and try again.');
+            }
+        }
+
+        function displayConversation() {
+            if (conversations.length === 0) {
+                document.getElementById('conversation').innerHTML = 'No conversations loaded.';
+                return;
+            }
+
+            const conversation = conversations[currentIndex];
+            let output = `<h2>Conversation ${currentIndex + 1} of ${conversations.length}</h2>`;
+            output += `<p><strong>Context:</strong> ${conversation.context}</p>`;
+            output += `<p><strong>Manipulation Type:</strong> ${conversation.manipulation_type}</p>`;
+            output += `<p><strong>Manipulation Description:</strong> ${conversation.manipulation_description.description}</p>`;
+            output += `<p><strong>Successful Persuasion:</strong> ${conversation.successful_persuasion}</p>`;
+            output += `<h3>Chat:</h3>`;
+
+            // Parse and format the chat completion
+            const chatLines = conversation.chat_completion.split('\n');
+            let currentSpeaker = '';
+            let currentMessage = '';
+
+            chatLines.forEach(line => {
+                if (line.startsWith('@@@')) {
+                    if (currentMessage) {
+                        output += formatChatMessage(currentSpeaker, currentMessage);
+                        currentMessage = '';
+                    }
+                    currentSpeaker = line.substring(3).trim();
+                } else {
+                    currentMessage += line + ' ';
+                }
+            });
+
+            if (currentMessage) {
+                output += formatChatMessage(currentSpeaker, currentMessage);
+            }
+
+            document.getElementById('conversation').innerHTML = output;
+        }
+
+        function formatChatMessage(speaker, message) {
+            const formattedMessage = message.replace(/<<(.*?)>>/g, '<span class="manipulation-attempt">$1</span>');
+            return `<div class="chat-message">
+                <strong>${speaker}:</strong> ${formattedMessage}
+            </div>`;
+        }
+
+        function nextConversation() {
+            if (conversations.length === 0) return;
+            currentIndex = (currentIndex + 1) % conversations.length;
+            displayConversation();
+        }
+    </script>
+</body>
+
+</html>

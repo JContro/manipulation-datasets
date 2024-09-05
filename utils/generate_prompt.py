@@ -25,6 +25,7 @@ def generate_conversation_instructions(manipulation_type: str) -> str:
 
 def generate_system_message_instructions(manipulation_type: str) -> str:
     return (
+        "Make the conversation last at least 10 turns. "
         "At the end of the conversation add a system message that says what the user ended up choosing, "
         f"then a score from 1-10 on how well the conversations represents {manipulation_type}. "
         "The system message starts '@@@SYSTEM: '"
@@ -87,8 +88,8 @@ def generate_general_prompt(context: Dict[str, Any], manipulation_types: Dict[st
 def generate_prompts(contexts: List[Dict[str, Any]], manipulation_types: Dict[str, str], n: int = 1) -> List[Dict[str, Any]]:
     prompts = []
     
-    for _ in range(n):
-        context = select_random_context(contexts)
+    for i in range(n):
+        context = contexts[i%len(contexts)]
         if context["category"] == "Chatbot Conversation Topic":
             prompt_info = generate_chatbot_prompt(context, manipulation_types)
         else:

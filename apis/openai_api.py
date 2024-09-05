@@ -33,6 +33,7 @@ def process_prompt(client: OpenAI, prompt: Dict) -> Dict:
         chat_completion = client.chat.completions.create(
             messages=[message],
             model=MODEL_NAME,
+            temperature=0.7,
         )
         output = prompt.copy()
         output["model"] = MODEL_NAME
@@ -58,15 +59,15 @@ def run_model(n: int):
 
         pprint(prompts)
 
-        # client = setup_openai_client()
-        # outputs = []
-        # for prompt in prompts:
-        #     output = process_prompt(client, prompt)
-        #     outputs.append(output)
+        client = setup_openai_client()
+        outputs = []
+        for prompt in prompts:
+            output = process_prompt(client, prompt)
+            outputs.append(output)
 
-        # save_outputs(outputs)
-        # logger.info(f"Saved {len(outputs)} outputs")
-        # logger.info("Model run completed successfully")
+        save_outputs(outputs)
+        logger.info(f"Saved {len(outputs)} outputs")
+        logger.info("Model run completed successfully")
     except Exception as e:
         logger.error(f"Error in run_model: {str(e)}")
         raise

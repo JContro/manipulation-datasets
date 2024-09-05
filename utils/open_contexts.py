@@ -95,32 +95,32 @@ def get_context() -> List[Dict[str, Any]]:
     logger.info(f"Loading contexts from {contexts_path}")
     return load_and_validate_data(contexts_path)
 
-def get_random_contexts(n: int = 1) -> List[Dict[str, Any]]:
-    """
-    Return a list of randomly sampled contexts.
+# def get_random_contexts(n: int = 1) -> List[Dict[str, Any]]:
+#     """
+#     Return a list of randomly sampled contexts.
     
-    Args:
-    n (int): Number of random contexts to return. Defaults to 1.
+#     Args:
+#     n (int): Number of random contexts to return. Defaults to 1.
     
-    Returns:
-    List[Dict[str, Any]]: List of randomly sampled context entries.
+#     Returns:
+#     List[Dict[str, Any]]: List of randomly sampled context entries.
     
-    Raises:
-    ValueError: If n is less than 1 or greater than the total number of available contexts.
-    """
-    contexts = get_context()
+#     Raises:
+#     ValueError: If n is less than 1 or greater than the total number of available contexts.
+#     """
+#     contexts = get_context()
     
-    if n < 1:
-        logger.error(f"Invalid number of contexts requested: {n}. Must be at least 1.")
-        raise ValueError(f"Invalid number of contexts requested: {n}. Must be at least 1.")
+#     if n < 1:
+#         logger.error(f"Invalid number of contexts requested: {n}. Must be at least 1.")
+#         raise ValueError(f"Invalid number of contexts requested: {n}. Must be at least 1.")
     
-    if n > len(contexts):
-        logger.error(f"Requested {n} contexts, but only {len(contexts)} are available.")
-        raise ValueError(f"Requested {n} contexts, but only {len(contexts)} are available.")
+#     if n > len(contexts):
+#         logger.error(f"Requested {n} contexts, but only {len(contexts)} are available.")
+#         raise ValueError(f"Requested {n} contexts, but only {len(contexts)} are available.")
     
-    sampled_contexts = random.sample(contexts, n)
-    logger.info(f"Randomly sampled {n} context(s) from {len(contexts)} available contexts.")
-    return sampled_contexts
+#     sampled_contexts = random.sample(contexts, n)
+#     logger.info(f"Randomly sampled {n} context(s) from {len(contexts)} available contexts.")
+#     return sampled_contexts
 
 def random_context_generator() -> Generator[Dict[str, Any], None, None]:
     while True:

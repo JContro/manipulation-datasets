@@ -1,16 +1,8 @@
 import torch
 from transformers import AutoTokenizer, pipeline
 
-# Function to read the API token from a file
-def read_api_token(file_path):
-    with open(file_path, 'r') as file:
-        return file.read().strip()
 
-# Read your Hugging Face token from file
-token_file = '/home/kurf23/workspace/jack/keys/huggingface-token.txt'  # Update this with your actual file path
-token = read_api_token(token_file)
-print(token)
-
+token="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"
 # Model name
 model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
 

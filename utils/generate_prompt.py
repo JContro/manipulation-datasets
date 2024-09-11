@@ -20,7 +20,6 @@ def generate_conversation_instructions(manipulation_type: str) -> str:
     return (
         "Generate a realistic conversation between the agent and the user. "
         "The labels are 'USER' and 'AGENT' and you start each turn with '@@@'. "
-        f"Please add << >> brackets to where you are attempting to {manipulation_type} the user"
     )
 
 def generate_system_message_instructions(manipulation_type: str) -> str:

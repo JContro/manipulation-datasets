@@ -61,11 +61,19 @@ def run_model(n: int):
 
         client = setup_openai_client()
         outputs = []
-        for prompt in prompts:
+        for i, prompt in enumerate(prompts, 1):
             output = process_prompt(client, prompt)
             outputs.append(output)
 
-        save_outputs(outputs)
+            # Checkpoint and save every 10 outputs
+            if i % 3 == 0:
+                logger.info(f"Checkpointing and saving outputs at iteration {i}")
+                save_outputs(outputs, filename=f"outputs.json")
+                outputs = []
+            
+            # Log progress
+            if i % 3 == 0 or i == len(prompts):
+                logger.info(f"Processed {i}/{len(prompts)} prompts")
         logger.info(f"Saved {len(outputs)} outputs")
         logger.info("Model run completed successfully")
     except Exception as e:

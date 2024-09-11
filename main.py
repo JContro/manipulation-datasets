@@ -9,6 +9,8 @@ from apis.openai_api import run_model as openai_run_model
 from apis.google_api import run_model as google_run_model
 from apis.anthropic_api import run_model as anthropic_run_model
 
+
+
 def setup_logging(log_level):
     logging.basicConfig(
         level=log_level,
@@ -46,13 +48,24 @@ def load_env_variables():
 
 def main():
     parser = argparse.ArgumentParser(description="Software configuration script")
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument("--api", action="store_true", help="Use API mode")
-    group.add_argument("--local", action="store_true", help="Use local mode")
-    parser.add_argument("--model", choices=["claude", "gemini", "gpt4", "huggingface"], help="Select API model (only if --api is used)")
+    mode_group = parser.add_mutually_exclusive_group()
+    mode_group.add_argument("--api", action="store_true", help="Use API mode")
+    mode_group.add_argument("--local", action="store_true", help="Use local mode")
+    
+    parser.add_argument("--model", help="Select model")
     parser.add_argument("--log-level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"], help="Set the logging level")
     parser.add_argument("-n", type=int, default=1, help="Custom parameter (default: 1)")
+    
     args = parser.parse_args()
+    
+    if args.api:
+        if args.model not in ["claude", "gemini", "gpt4", "huggingface"]:
+            parser.error("When using --api, --model must be one of: claude, gemini, gpt4, huggingface")
+    elif args.local:
+        if args.model not in ["llama7b", "Falcon"]:
+            parser.error("When using --local, --model must be one of: llama7b, Falcon")
+    else:
+        parser.error("Either --api or --local must be specified")
 
     global logger
     logger = setup_logging(args.log_level)
@@ -73,6 +86,9 @@ def main():
     logger.info(f"Selected mode: {mode}")
     if mode == "api":
         logger.info(f"Selected model: {model}")
+    if mode == "local":
+        logger.info("Running a local model")
+
     logger.info(f"Value of n: {n}")
 
     if mode == "api" and model:
@@ -97,6 +113,12 @@ def main():
         if model == "claude":
             anthropic_run_model(n)
             
+
+    if mode == "local":
+        if args.model == "llama7b":
+            from local_models.llama3_7b import run_model as llama_run_model 
+            llama_run_model(n)
+        
     
 
 if __name__ == "__main__":

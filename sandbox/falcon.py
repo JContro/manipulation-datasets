@@ -4,7 +4,7 @@ import torch
 
 # Set up the model and tokenizer
 model_name = "tiiuae/falcon-7b-instruct"
-token = "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"
+# token = get from env 
 
 try:
     print("Loading tokenizer...")
